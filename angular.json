@@ -5,10 +5,20 @@
   "projects": {
     "ephemeral-angular": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss",
+          "style": "scss",
+          "changeDetection": "OnPush"
+        },
+        "@schematics/angular:module": {
+          "routing": true,
+          "commonModule": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "es",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -24,7 +34,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -89,7 +99,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }

@@ -1,0 +1,21 @@
+<table>
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>switch</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let entity of entities | keyvalue">
+    <td>{{ entity.key }}</td>
+    <td>{{ entity.value.name }}</td>
+    <td>{{ entity.value.switch ? 'on' : 'off' }}</td>
+    <td>
+      <button (click)="entitySwitched.emit(entity.key)">Switch</button>
+      <button (click)="entityRemoved.emit(entity.key)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

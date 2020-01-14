@@ -3,6 +3,13 @@
   "rules": {
     "array-type": false,
     "arrow-parens": false,
+    "variable-name": {
+      "options": [
+        "allow-pascal-case",
+        "allow-leading-underscore",
+        "allow-snake-case"
+      ]
+    },
     "deprecation": {
       "severity": "warning"
     },
@@ -12,13 +19,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "es",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "es",
       "kebab-case"
     ],
     "import-blacklist": [
