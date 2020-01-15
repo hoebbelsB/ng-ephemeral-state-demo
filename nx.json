@@ -23,6 +23,9 @@
     },
     "ng-state": {
       "tags": ["scope:client"]
+    },
+    "api": {
+      "tags": ["scope:shared"]
     }
   }
 }

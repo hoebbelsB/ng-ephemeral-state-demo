@@ -4,6 +4,7 @@ export type EphemeralStateAccumulatorFn<T> = (acc: T, slices: Partial<T>) => T;
 export type EphemeralSideEffectFn<T> = (args: T) => void;
 
 export interface ReadableEphemeralState<T> {
+    readonly state$: Observable<T>;
     /**
      * select<R>(operator?: OperatorFunction<T, R>): Observable<T | R>
      *

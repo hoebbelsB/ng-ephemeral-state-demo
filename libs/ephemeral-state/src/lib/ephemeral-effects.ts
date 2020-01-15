@@ -1,16 +1,12 @@
 import { Observable, Subject, Subscription } from 'rxjs';
 import { mergeAll, tap } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
 export class EphemeralEffects {
   private readonly subscription = new Subscription();
   private readonly effectSubject = new Subject<any>();
 
-  constructor() {}
-
-  init() {
-    this.subscription.add(this.effectSubject.pipe(mergeAll()).subscribe());
+  constructor() {
+      this.subscription.add(this.effectSubject.pipe(mergeAll()).subscribe());
   }
 
   /**

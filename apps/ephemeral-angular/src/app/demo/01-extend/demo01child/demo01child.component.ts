@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    HostBinding,
+    Inject,
+    Input,
+    OnInit,
+    Output
+} from '@angular/core';
+import { ReadableEphemeralState } from '@ephemeral-angular/ephemeral-state';
+import { AppState, GLOBAL_STATE } from '../../../global-state.service';
 import { DemoEntity } from '../../interfaces';
 
 @Component({
@@ -23,7 +34,9 @@ export class Demo01childComponent implements OnInit {
 
     @HostBinding('class.component-loading') _loading = false;
 
-    constructor() {
+    constructor(
+        @Inject(GLOBAL_STATE) public appState: ReadableEphemeralState<AppState>
+    ) {
     }
 
     ngOnInit() {

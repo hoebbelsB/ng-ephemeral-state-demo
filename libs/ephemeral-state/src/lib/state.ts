@@ -21,11 +21,13 @@ export class EphemeralState<T> implements ConnectableEphemeralState<T> {
     private readonly _stateAccumulator: EphemeralStateAccumulatorFn<T>;
 
     private readonly _state$: Observable<T>;
+    readonly state$: Observable<T>;
 
     constructor(stateAccumulator: EphemeralStateAccumulatorFn<T> = defaultStateAccumulation) {
         this._stateAccumulator = stateAccumulator;
         this._state$ = this.bootstrapState();
         this.init();
+        this.state$ = this.select();
     }
 
     private init() {

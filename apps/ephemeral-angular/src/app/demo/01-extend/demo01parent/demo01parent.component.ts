@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { NgEphemeralState } from '@ephemeral-angular/ng-state';
 import { of, Subject } from 'rxjs';
 import { startWith, switchMap, tap } from 'rxjs/operators';
-import { NgEphemeralState } from '../../../state/ng-ephemeral.state';
 import { DemoDataService } from '../../demo-data.service';
 import { DemoEntity, DemoState, DemoView } from '../../interfaces';
 

@@ -14,7 +14,7 @@
     <td>{{ entity.value.switch ? 'on' : 'off' }}</td>
     <td>
       <button (click)="entitySwitched.emit(entity.key)">Switch</button>
-      <button (click)="entityRemoved.emit(entity.key)">Delete</button>
+      <button *ngIf="(appState.state$ | ngrxPush).loggedIn" (click)="entityRemoved.emit(entity.key)">Delete</button>
     </td>
   </tr>
   </tbody>

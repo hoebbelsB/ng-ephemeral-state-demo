@@ -17,7 +17,8 @@
       "@ephemeral-angular/ephemeral-state": [
         "libs/ephemeral-state/src/index.ts"
       ],
-      "@ephemeral-angular/ng-state": ["libs/ng-state/src/index.ts"]
+      "@ephemeral-angular/ng-state": ["libs/ng-state/src/index.ts"],
+      "@ephemeral-angular/api": ["libs/api/src/index.ts"]
     },
     "rootDir": "."
   },

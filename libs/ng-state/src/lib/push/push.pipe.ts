@@ -7,6 +7,7 @@ import {
   PipeTransform,
   Type,
 } from '@angular/core';
+import { stateful } from '@ephemeral-angular/ephemeral-state';
 import { isObservable, Observable, of, Subject, Subscription } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -20,7 +21,6 @@ import {
   getRequestAnimationFrameFromZoneFullEnv,
   observeOncePerAnimationFrame,
   STATE_DEFAULT,
-  stateful,
 } from '../core';
 
 interface NgRxPushPipeConfig {

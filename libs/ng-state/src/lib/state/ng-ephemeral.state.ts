@@ -11,8 +11,6 @@ import { INITIAL_STATE, STATE_ACCUMULATOR } from '../interface';
 @Injectable()
 export class NgEphemeralState<T> extends EphemeralState<T> implements OnDestroy {
 
-    readonly state$: Observable<T> = this.select();
-
     private _localState: T;
 
     constructor(

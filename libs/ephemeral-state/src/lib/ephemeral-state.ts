@@ -1,3 +1,4 @@
+import { stateful } from '@ephemeral-angular/ephemeral-state';
 import {
   ConnectableObservable,
   merge,
@@ -17,12 +18,8 @@ import {
   tap,
 } from 'rxjs/operators';
 
-import { stateful } from '../core/operators';
 import { defaultStateAccumulation } from './utils';
-import { Injectable, OnDestroy } from '@angular/core';
-
-@Injectable({ providedIn: 'root' })
-export class EphemeralState<T> implements OnDestroy {
+export class EphemeralState<T> {
   private readonly subscription = new Subscription();
   private readonly stateObservables = new Subject<Observable<Partial<T>>>();
   private readonly stateSlices = new Subject<Partial<T>>();
@@ -238,10 +235,6 @@ export class EphemeralState<T> implements OnDestroy {
    */
   teardown(): void {
     this.subscription.unsubscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.teardown();
   }
 
   private isOperateFnArray(

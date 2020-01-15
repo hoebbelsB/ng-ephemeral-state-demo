@@ -1,7 +1,15 @@
-<div class="top-bar">
+<div class="top-bar" *ngIf="globalState.state$ | ngrxPush as appState">
   <span class="top-bar-item app-title"> {{ title }}</span>
-  <span class="top-bar-item global-state">{{ (globalState.state$ | ngrxPush).state }}</span>
+  <span class="top-bar-item global-state">{{ appState.state }}</span>
   <button class="top-bar-item" (click)="globalState.toggleState.next()">toggle global state</button>
+  <span class="top-bar-item" style="margin-left: auto;"
+          *ngIf="appState.loggedIn">Hi {{ appState.user?.name }}</span>
+  <button class="top-bar-item" style="margin-left: auto;"
+          *ngIf="!appState.loggedIn"
+          (click)="authService.login$.next({_id: '1', name: 'Ephemeral Test'})">login</button>
+  <button class="top-bar-item" style="margin-left: auto;"
+          *ngIf="appState.loggedIn"
+          (click)="authService.login$.next(null)">logout</button>
 </div>
 <div class="demos">
   <es-demo01parent></es-demo01parent>

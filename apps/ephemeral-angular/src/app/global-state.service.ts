@@ -1,15 +1,19 @@
 import { Injectable, InjectionToken } from '@angular/core';
+import { User } from '@ephemeral-angular/api';
+import { ReadableEphemeralState } from '@ephemeral-angular/ephemeral-state';
+import { NgEphemeralState } from '@ephemeral-angular/ng-state';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NgEphemeralState } from './state/ng-ephemeral.state';
-import { ReadableEphemeralState } from './state/state';
+import { AuthService } from './auth/auth.service';
 
 
-export interface GlobalState {
+export interface AppState {
     state: string;
+    user: User;
+    loggedIn: boolean;
 }
 
-export const GLOBAL_STATE = new InjectionToken<ReadableEphemeralState<GlobalState>>('global-app-state');
+export const GLOBAL_STATE = new InjectionToken<ReadableEphemeralState<AppState>>('global-app-state');
 
 const makeState = () => {
     let result = '';
@@ -21,12 +25,16 @@ const makeState = () => {
     return result;
 };
 
-@Injectable()
-export class GlobalStateService extends NgEphemeralState<GlobalState> {
+@Injectable({
+    providedIn: 'root'
+})
+export class GlobalStateService extends NgEphemeralState<AppState> {
 
     toggleState = new Subject<void>();
 
-    constructor() {
+    constructor(
+        private authService: AuthService
+    ) {
         super(
             {
                 state: 'global-initial-state'
@@ -38,5 +46,7 @@ export class GlobalStateService extends NgEphemeralState<GlobalState> {
                 map(() => makeState())
             )
         );
+        this.connectState('user', this.authService.select('user'));
+        this.connectState('loggedIn', this.authService.select('loggedIn'));
     }
 }
