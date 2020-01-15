@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
-import { GLOBAL_STATE, GlobalStateService } from './global-state.service';
+import { APP_STATE, GlobalStateService } from './global-state.service';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { GLOBAL_STATE, GlobalStateService } from './global-state.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
-            provide: GLOBAL_STATE,
+            provide: APP_STATE,
             useExisting: GlobalStateService
         }
     ]

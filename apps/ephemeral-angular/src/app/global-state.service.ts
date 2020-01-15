@@ -13,7 +13,7 @@ export interface AppState {
     loggedIn: boolean;
 }
 
-export const GLOBAL_STATE = new InjectionToken<ReadableEphemeralState<AppState>>('global-app-state');
+export const APP_STATE = new InjectionToken<ReadableEphemeralState<AppState>>('global-app-state');
 
 const makeState = () => {
     let result = '';

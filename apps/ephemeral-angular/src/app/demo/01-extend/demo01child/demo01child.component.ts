@@ -9,7 +9,7 @@ import {
     Output
 } from '@angular/core';
 import { ReadableEphemeralState } from '@ephemeral-angular/ephemeral-state';
-import { AppState, GLOBAL_STATE } from '../../../global-state.service';
+import { AppState, APP_STATE } from '../../../global-state.service';
 import { DemoEntity } from '../../interfaces';
 
 @Component({
@@ -35,7 +35,7 @@ export class Demo01childComponent implements OnInit {
     @HostBinding('class.component-loading') _loading = false;
 
     constructor(
-        @Inject(GLOBAL_STATE) public appState: ReadableEphemeralState<AppState>
+        @Inject(APP_STATE) public appState: ReadableEphemeralState<AppState>
     ) {
     }
 
