@@ -1,6 +1,6 @@
 <div class="top-bar">
   <span class="top-bar-item app-title"> {{ title }}</span>
-  <span class="top-bar-item global-state">{{ (globalState.state$ | async).state }}</span>
+  <span class="top-bar-item global-state">{{ (globalState.state$ | ngrxPush).state }}</span>
   <button class="top-bar-item" (click)="globalState.toggleState.next()">toggle global state</button>
 </div>
 <div class="demos">

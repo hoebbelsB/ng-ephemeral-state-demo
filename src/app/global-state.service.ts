@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, InjectionToken } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NgEphemeralState } from './state/ng-ephemeral.state';
+import { ReadableEphemeralState } from './state/state';
 
 
 export interface GlobalState {
     state: string;
 }
+
+export const GLOBAL_STATE = new InjectionToken<ReadableEphemeralState<GlobalState>>('global-app-state');
 
 const makeState = () => {
     let result = '';
@@ -18,9 +21,7 @@ const makeState = () => {
     return result;
 };
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class GlobalStateService extends NgEphemeralState<GlobalState> {
 
     toggleState = new Subject<void>();

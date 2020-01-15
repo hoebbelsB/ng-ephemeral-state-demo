@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { DemoModule } from './demo/demo.module';
+import { NgRxComponentModule } from './state/state.module';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { DemoModule } from './demo/demo.module';
   ],
     imports: [
         BrowserModule,
+        NgRxComponentModule,
         DemoModule
     ],
   providers: [],

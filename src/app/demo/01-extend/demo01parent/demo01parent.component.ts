@@ -23,7 +23,9 @@ export class Demo01parentComponent extends NgEphemeralState<DemoState> implement
     ) {
         super(
             {
-                title: 'demo01'
+                title: 'demo01',
+                entities: null,
+                loading: true
             }
         );
     }

@@ -1,10 +1,16 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
+
 import { Observable } from 'rxjs';
-import { defaultStateAccumulation, EphemeralState, EphemeralStateAccumulatorFn } from './lib';
-import { INITIAL_STATE, STATE_ACCUMULATOR } from './providers';
+import {
+    defaultStateAccumulation,
+    EphemeralState,
+    EphemeralStateAccumulatorFn,
+    INITIAL_STATE,
+    STATE_ACCUMULATOR
+} from './state';
 
 @Injectable()
-export class NgEphemeralState<T> extends EphemeralState<T> {
+export class NgEphemeralState<T> extends EphemeralState<T> implements OnDestroy {
 
     readonly state$: Observable<T> = this.select();
 
@@ -22,6 +28,10 @@ export class NgEphemeralState<T> extends EphemeralState<T> {
         if (initialState) {
             this.setState(initialState);
         }
+    }
+
+    ngOnDestroy(): void {
+        this.teardown();
     }
 
     getState(): T {

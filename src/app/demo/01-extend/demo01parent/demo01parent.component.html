@@ -1,4 +1,4 @@
-<ng-container *ngIf="state$ | async as vm">
+<ng-container *ngIf="state$ | ngrxPush as vm">
   <h1>{{ vm.title }}</h1>
   <p [style.color]="vm.loading ? 'orange' : 'green'" style="font-weight: bold;">Loading:
     {{ vm.loading ? 'LOADING' : 'idle' }}</p>
