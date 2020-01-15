@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "",
   "projects": {
     "ephemeral-angular": {
       "projectType": "application",
@@ -16,34 +16,32 @@
           "commonModule": false
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/ephemeral-angular",
+      "sourceRoot": "apps/ephemeral-angular/src",
       "prefix": "es",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ephemeral-angular",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "outputPath": "dist/apps/ephemeral-angular",
+            "index": "apps/ephemeral-angular/src/index.html",
+            "main": "apps/ephemeral-angular/src/main.ts",
+            "polyfills": "apps/ephemeral-angular/src/polyfills.ts",
+            "tsConfig": "apps/ephemeral-angular/tsconfig.app.json",
+            "aot": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/ephemeral-angular/src/favicon.ico",
+              "apps/ephemeral-angular/src/assets"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["apps/ephemeral-angular/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/ephemeral-angular/src/environments/environment.ts",
+                  "with": "apps/ephemeral-angular/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -51,7 +49,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -73,7 +70,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ephemeral-angular:build"
+            "browserTarget": "ephemeral-angular:build",
+            "proxyConfig": "apps/ephemeral-angular/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -90,17 +88,15 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
+            "main": "apps/ephemeral-angular/src/test.ts",
+            "polyfills": "apps/ephemeral-angular/src/polyfills.ts",
+            "tsConfig": "apps/ephemeral-angular/tsconfig.spec.json",
+            "karmaConfig": "apps/ephemeral-angular/karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/ephemeral-angular/src/favicon.ico",
+              "apps/ephemeral-angular/src/assets"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["apps/ephemeral-angular/src/styles.scss"],
             "scripts": []
           }
         },
@@ -108,19 +104,22 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "apps/ephemeral-angular/tsconfig.app.json",
+              "apps/ephemeral-angular/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
-        },
+        }
+      }
+    },
+    "ephemeral-angular-e2e": {
+      "projectType": "application",
+      "root": "apps/ephemeral-angular-e2e",
+      "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
+            "protractorConfig": "apps/ephemeral-angular-e2e/protractor.conf.js",
             "devServerTarget": "ephemeral-angular:serve"
           },
           "configurations": {
@@ -128,9 +127,130 @@
               "devServerTarget": "ephemeral-angular:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/ephemeral-angular-e2e/tsconfig.json",
+            "exclude": ["**/node_modules/**"]
+          }
         }
       }
     },
+    "reactive-backend": {
+      "root": "apps/reactive-backend",
+      "sourceRoot": "apps/reactive-backend/src",
+      "projectType": "application",
+      "prefix": "reactive-backend",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/reactive-backend",
+            "main": "apps/reactive-backend/src/main.ts",
+            "tsConfig": "apps/reactive-backend/tsconfig.app.json",
+            "assets": ["apps/reactive-backend/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/reactive-backend/src/environments/environment.ts",
+                  "with": "apps/reactive-backend/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "reactive-backend:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/reactive-backend/tsconfig.app.json",
+              "apps/reactive-backend/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/reactive-backend/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/reactive-backend/jest.config.js",
+            "tsConfig": "apps/reactive-backend/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "ephemeral-state": {
+      "root": "libs/ephemeral-state",
+      "sourceRoot": "libs/ephemeral-state/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ephemeral-state/tsconfig.lib.json",
+              "libs/ephemeral-state/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ephemeral-state/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ephemeral-state/jest.config.js",
+            "tsConfig": "libs/ephemeral-state/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "ng-state": {
+      "projectType": "library",
+      "root": "libs/ng-state",
+      "sourceRoot": "libs/ng-state/src",
+      "prefix": "ephemeral-angular",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ng-state/tsconfig.lib.json",
+              "libs/ng-state/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ng-state/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ng-state/jest.config.js",
+            "tsConfig": "libs/ng-state/tsconfig.spec.json",
+            "setupFile": "libs/ng-state/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    }
   },
-  "defaultProject": "ephemeral-angular"
+  "defaultProject": "ephemeral-angular",
+  "cli": {
+    "analytics": "d764ea36-601a-43ec-8e12-28b40e14801c",
+    "defaultCollection": "@nrwl/nest"
+  }
 }

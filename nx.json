@@ -1,0 +1,28 @@
+{
+  "npmScope": "ephemeral-angular",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "ephemeral-angular": {
+      "tags": ["scope:client"]
+    },
+    "ephemeral-angular-e2e": {
+      "tags": ["scope:client"],
+      "implicitDependencies": ["ephemeral-angular"]
+    },
+    "reactive-backend": {
+      "tags": ["scope:backend"]
+    },
+    "ephemeral-state": {
+      "tags": ["scope:shared"]
+    },
+    "ng-state": {
+      "tags": ["scope:client"]
+    }
+  }
+}
