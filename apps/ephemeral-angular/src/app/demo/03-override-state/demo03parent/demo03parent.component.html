@@ -1,0 +1,11 @@
+<ng-container *ngIf="state$ | ngrxPush as vm">
+  <h1>{{ vm.title }}</h1>
+  <p [style.color]="vm.loading ? 'orange' : 'green'" style="font-weight: bold;">Loading:
+    {{ vm.loading ? 'LOADING' : 'idle' }}</p>
+  <button (click)="reload.next()">Refresh</button>
+  <es-demo01child
+    (entityRemoved)="removeEntity.next($event)"
+    (entitySwitched)="entitySwitched.next($event)"
+    [loading]="vm.loading"
+    [entities]="vm.entities"></es-demo01child>
+</ng-container>

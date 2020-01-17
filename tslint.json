@@ -10,6 +10,7 @@
         "allow-snake-case"
       ]
     },
+    "no-trailing-whitespace": false,
     "deprecation": {
       "severity": "warning"
     },
