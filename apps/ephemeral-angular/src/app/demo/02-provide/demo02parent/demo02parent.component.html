@@ -3,9 +3,8 @@
   <p [style.color]="viewState.loading ? 'orange' : 'green'" style="font-weight: bold;">Loading:
     {{ viewState.loading ? 'LOADING' : 'idle' }}</p>
   <button (click)="viewModel.reload.next()">Refresh</button>
-  <es-demo01child
+  <es-demo02child
     (entityRemoved)="viewModel.removeEntity.next($event)"
-    (entitySwitched)="viewModel.entitySwitched.next($event)"
     [loading]="viewState.loading"
-    [entities]="viewState.entities"></es-demo01child>
+    [entities]="viewState.entities"></es-demo02child>
 </ng-container>

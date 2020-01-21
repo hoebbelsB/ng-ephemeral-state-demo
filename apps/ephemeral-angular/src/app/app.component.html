@@ -12,6 +12,7 @@
           (click)="authService.login$.next(null)">logout</button>
 </div>
 <div class="demos">
+  <button (click)="globalState.toggleDemo2.next()">toggle demo2</button>
   <es-demo01parent></es-demo01parent>
   <es-demo02parent></es-demo02parent>
 </div>

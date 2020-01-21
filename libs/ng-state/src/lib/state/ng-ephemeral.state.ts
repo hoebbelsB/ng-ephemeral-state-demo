@@ -4,13 +4,25 @@ import {
     EphemeralState,
     EphemeralStateAccumulatorFn
 } from '@ephemeral-angular/ephemeral-state';
-
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { INITIAL_STATE, STATE_ACCUMULATOR } from '../interface';
+
+export enum SIGNAL_TYPE {
+    PENDING,
+    SUCCESS,
+    ERROR
+}
+
+export interface Signal<T> {
+    processId: string;
+    type: SIGNAL_TYPE;
+    payload?: T;
+}
 
 @Injectable()
 export class NgEphemeralState<T> extends EphemeralState<T> implements OnDestroy {
 
+    protected readonly signal$ = new Subject<Signal<any>>();
     private _localState: T;
 
     constructor(

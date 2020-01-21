@@ -5,7 +5,6 @@
   <button (click)="reload.next()">Refresh</button>
   <es-demo01child
     (entityRemoved)="removeEntity.next($event)"
-    (entitySwitched)="entitySwitched.next($event)"
     [loading]="vm.loading"
     [entities]="vm.entities"></es-demo01child>
 </ng-container>

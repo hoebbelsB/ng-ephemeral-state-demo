@@ -1,5 +1,5 @@
 export function defaultStateAccumulation<T>(acc: T, command: Partial<T>): T {
-  return { ...acc, ...command };
+    return { ...acc, ...command };
 }
 
 export function deleteUndefinedStateAccumulator<T>(

@@ -2,7 +2,12 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": []
+    "types": [],
+    "lib": [
+      "dom",
+      "esnext.asynciterable",
+      "es2015.collection"
+    ]
   },
   "files": [
     "src/main.ts",

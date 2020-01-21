@@ -7,7 +7,7 @@ import {
     Subject,
     Subscription
 } from 'rxjs';
-import { map, mergeAll, observeOn, pluck, publishReplay, scan, tap } from 'rxjs/operators';
+import { map, mergeAll, observeOn, pluck, publishReplay, scan, take, takeUntil, tap } from 'rxjs/operators';
 import { ConnectableEphemeralState, EphemeralSideEffectFn, EphemeralStateAccumulatorFn } from './interfaces';
 
 import { stateful } from './operators';
@@ -32,7 +32,7 @@ export class EphemeralState<T> implements ConnectableEphemeralState<T> {
 
     private init() {
         this._subscription.add((this._state$ as ConnectableObservable<T>).connect());
-        this._subscription.add(this._effectSubject.pipe(mergeAll())
+        this._subscription.add(this._effectSubject.pipe(mergeAll(), take(10))
             .subscribe());
     }
 

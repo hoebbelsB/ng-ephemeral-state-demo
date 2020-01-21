@@ -8,9 +8,9 @@ import {
     OnInit,
     Output
 } from '@angular/core';
+import { Track } from '@ephemeral-angular/api';
 import { ReadableEphemeralState } from '@ephemeral-angular/ephemeral-state';
 import { AppState, APP_STATE } from '../../../global-state.service';
-import { DemoEntity } from '../../interfaces';
 
 @Component({
     selector: 'es-demo01child',
@@ -20,7 +20,7 @@ import { DemoEntity } from '../../interfaces';
 })
 export class Demo01childComponent implements OnInit {
 
-    @Input() entities: Map<string, DemoEntity>;
+    @Input() entities: Map<string, Track>;
     @Input()
     set loading(val: boolean) {
         this._loading = val;

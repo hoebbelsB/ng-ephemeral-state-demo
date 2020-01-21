@@ -4,6 +4,8 @@ import { NgStateModule } from '@ephemeral-angular/ng-state';
 
 import { AppComponent } from './app.component';
 import { DemoModule } from './demo/demo.module';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,9 @@ import { DemoModule } from './demo/demo.module';
     imports: [
         BrowserModule,
         NgStateModule,
-        DemoModule
+        DemoModule,
+        GraphQLModule,
+        HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Track } from '@ephemeral-angular/api';
 import { NgEphemeralState } from '@ephemeral-angular/ng-state';
 import { of, Subject } from 'rxjs';
 import { startWith, switchMap, tap } from 'rxjs/operators';
 import { DemoDataService } from '../../demo-data.service';
-import { DemoEntity, DemoState, DemoView } from '../../interfaces';
+import { DemoState, DemoView } from '../../interfaces';
 
 @Component({
     selector: 'es-demo01parent',
@@ -13,9 +14,8 @@ import { DemoEntity, DemoState, DemoView } from '../../interfaces';
 })
 export class Demo01parentComponent extends NgEphemeralState<DemoState> implements DemoView, OnInit {
 
-    readonly addEntity: Subject<DemoEntity> = new Subject<DemoEntity>();
+    readonly addEntity: Subject<Track> = new Subject<Track>();
     readonly removeEntity: Subject<string> = new Subject<string>();
-    readonly entitySwitched: Subject<string> = new Subject<string>();
     readonly reload: Subject<void> = new Subject<void>();
 
     constructor(
@@ -40,12 +40,6 @@ export class Demo01parentComponent extends NgEphemeralState<DemoState> implement
             // @TODO: copy map right here? otherwise state will be mutated...
             const update = new Map(this.getState().entities);
             update.delete(_id);
-            this.setState({ entities: update });
-        });
-        this.connectEffect(this.entitySwitched, _id => {
-            // @TODO: copy map right here? otherwise state will be mutated...
-            const update = new Map(this.getState().entities);
-            update.get(_id).switch = !update.get(_id).switch;
             this.setState({ entities: update });
         });
     }

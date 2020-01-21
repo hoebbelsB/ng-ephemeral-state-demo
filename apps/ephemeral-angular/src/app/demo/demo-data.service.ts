@@ -1,45 +1,40 @@
 import { Injectable } from '@angular/core';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
 import { Observable, of } from 'rxjs';
-import { delay, mapTo } from 'rxjs/operators';
-import { DemoEntity, DemoState } from './interfaces';
+import { delay, map, mapTo } from 'rxjs/operators';
+import { Track } from '@ephemeral-angular/api';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DemoDataService {
 
-    constructor() {
+    constructor(
+        private apollo: Apollo
+    ) {
     }
 
-    getDemoData(): Observable<Map<string, DemoEntity>> {
-        const entities: DemoEntity[] = [
-            {
-                _id: '1',
-                name: 'demo01',
-                switch: true
-            },
-            {
-                _id: '2',
-                name: 'demo02',
-                switch: false
-            },
-            {
-                _id: '3',
-                name: 'demo03',
-                switch: true
-            },
-            {
-                _id: '4',
-                name: 'demo04',
-                switch: false
-            }
-        ];
-        const entityMap = new Map<string, DemoEntity>(entities.map(e => [e._id, { ...e }]));
-        return of(null)
-            .pipe(
-                delay(2000),
-                mapTo(entityMap)
-            );
+    getDemoData(): Observable<Map<string, Track>> {
+        return this.apollo
+            .query<{ tracks: Track[]}>({
+                query: gql`
+                    {
+                        tracks(skip: 0, take: 10) {
+                            id,
+                            milliseconds,
+                            name,
+                            unitPrice,
+                            bytes,
+                            composer
+                        }
+                    }
+                `
+            }).pipe(
+                map(values => {
+                    return new Map(values.data.tracks.map(t => ([t.id, {...t}])));
+                })
+        );
     }
 
 }

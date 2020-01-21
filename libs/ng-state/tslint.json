@@ -3,21 +3,5 @@
   "rules": {
     "directive-selector": [true, "attribute", "ephemeralAngular", "camelCase"],
     "component-selector": [true, "element", "ephemeral-angular", "kebab-case"]
-  },
-  "nx-enforce-module-boundaries": [
-    true,
-    {
-      "allow": [],
-      "depConstraints": [
-        {
-          "sourceTag": "scope:shared",
-          "onlyDependOnLibsWithTags": ["scope:shared"]
-        },
-        {
-          "sourceTag": "scope:client",
-          "onlyDependOnLibsWithTags": ["scope:shared", "scope:client"]
-        }
-      ]
-    }
-  ]
+  }
 }

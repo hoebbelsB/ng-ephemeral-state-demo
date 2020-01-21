@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { DemoDataService } from '../../demo-data.service';
+import { GlobalStateService } from '../../../global-state.service';
 import { Demo02ViewModelService } from './demo02-view-model.service';
 
 @Component({
@@ -14,12 +14,18 @@ import { Demo02ViewModelService } from './demo02-view-model.service';
 export class Demo02parentComponent implements OnInit {
 
     constructor(
-        public viewModel: Demo02ViewModelService
+        public viewModel: Demo02ViewModelService,
+        // @Inject(APP_STATE) public appState: ReadableEphemeralState<AppState>
+        public appState: GlobalStateService
     ) {
     }
 
     ngOnInit() {
-
+        // this.appState.connectEffect(interval(1000), console.log);
+        /*this.appState.connectEffect(
+            this.viewModel.state$.pipe(switchMapTo(interval(1000))),
+            console.log
+        );*/
     }
 
 }
