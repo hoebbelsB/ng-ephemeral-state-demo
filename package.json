@@ -40,7 +40,7 @@
     "@nestjs/common": "^6.8.3",
     "@nestjs/core": "^6.8.3",
     "@nestjs/graphql": "^6.5.3",
-    "@nestjs/platform-express": "^6.8.3",
+    "@nestjs/platform-express": "^9.2.1",
     "@nrwl/workspace": "^8.11.1",
     "apollo-angular": "^1.8.0",
     "apollo-server-express": "^2.9.16",
